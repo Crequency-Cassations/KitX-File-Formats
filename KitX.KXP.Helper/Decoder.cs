@@ -34,7 +34,7 @@ namespace KitX.KXP.Helper
         /// <summary>
         /// 解码包体
         /// </summary>
-        /// <returns>返回 LoaderStruct 的json文本</returns>
+        /// <returns>返回 LoaderStruct 的 json 字符串 和 PluginStruct 的 json 字符串</returns>
         /// <param name="releaseFolder">释放文件的路径</param>
         /// <exception cref="Exception">哈希校验错误</exception>
         public Tuple<string, string> Decode(string releaseFolder)
