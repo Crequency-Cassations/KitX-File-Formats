@@ -29,6 +29,29 @@ namespace KitX.KXP.Helper
         }
 
         /// <summary>
+        /// 获取加载器结构和插件结构的字符串
+        /// </summary>
+        /// <returns>加载器结构和插件结构的字符串</returns>
+        public Tuple<string, string> GetLoaderAndPluginStruct()
+        {
+            FileStream fs = new FileStream(PackagePath, FileMode.Open, FileAccess.Read);
+            BinaryReader reader = new BinaryReader(fs);
+            byte[] header = reader.ReadBytes(16);
+            if (!Header.IsKXP(ref header))
+                throw new InvalidDataException("It's not a KXP Package.");
+            _ = reader.ReadBytes(16);
+            long loaderStructLength, pluginStructLength;
+            loaderStructLength = BitConverter.ToInt64(reader.ReadBytes(8), 0);
+            string loaderStructString = Encoding.UTF8.GetString(reader.ReadBytes((int)loaderStructLength));
+            pluginStructLength = BitConverter.ToInt64(reader.ReadBytes(8), 0);
+            string pluginStructString = Encoding.UTF8.GetString(reader.ReadBytes((int)pluginStructLength));
+            Tuple<string, string> result = new Tuple<string, string>(loaderStructString, pluginStructString);
+            reader.Close();
+            fs.Close();
+            return result;
+        }
+
+        /// <summary>
         /// 解码包体
         /// </summary>
         /// <returns>返回 LoaderStruct 的 json 字符串 和 PluginStruct 的 json 字符串</returns>
@@ -37,7 +60,7 @@ namespace KitX.KXP.Helper
         public Tuple<string, string> Decode(string releaseFolder)
         {
             if (!Directory.Exists(releaseFolder))
-                _ = Directory.CreateDirectory(releaseFolder);
+                _ = Directory.CreateDirectory(releaseFolder);   //  如果释放文件夹不存在就创建
 
             byte[] src = File.ReadAllBytes(PackagePath);    //  读取包的全部字节
 
