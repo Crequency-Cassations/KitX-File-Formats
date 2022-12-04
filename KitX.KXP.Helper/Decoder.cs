@@ -186,7 +186,11 @@ namespace KitX.KXP.Helper
                 byte[] fb = new byte[item.FileBodyLength];
                 for (int i = 0; i < item.FileNamePathLength; ++i, ++cursor) fn[i] = src[cursor];
                 for (int i = 0; i < item.FileBodyLength; ++i, ++cursor) fb[i] = src[cursor];
-                File.WriteAllBytes($"{releaseFolder}\\{Encoding.UTF8.GetString(fn)}", fb);
+                string fileName = Encoding.UTF8.GetString(fn);
+                string dirPath = Path.GetDirectoryName(fileName);
+                if (!Directory.Exists(dirPath))
+                    Directory.CreateDirectory(dirPath);
+                File.WriteAllBytes($"{releaseFolder}\\{fileName}", fb);
             }
 
             #endregion
