@@ -31,10 +31,12 @@ namespace KitX.KXP.Helper
         public void Encode(string rootDir, string saveFolder, string filename)
         {
             #region 读取每个文件的 byte[]
+
             Dictionary<string, byte[]> files = new Dictionary<string, byte[]>();
             foreach (var item in Files2Include)
                 if (File.Exists(item))
                     files.Add(GetRelativePath(rootDir, item), File.ReadAllBytes(item));
+
             #endregion
 
             byte[] loaderStruct = Encoding.UTF8.GetBytes(LoaderStruct);
@@ -53,6 +55,38 @@ namespace KitX.KXP.Helper
             FileStream fs = File.Create(target);    //  目标文件文件流
 
             Queue<byte> all_files = new Queue<byte>();  //  除开头哈希校验值的部分其它全部值
+
+            #region 入队 LoaderStruct 部分
+
+            EnqueueSingleLong(ref all_files, loaderStruct.LongLength);      //  入队加载器结构的长度
+
+#if DEBUG
+            Console.WriteLine($"Loader Struct Length: {loaderStruct.LongLength}");
+#endif
+
+            foreach (var item in loaderStruct)
+            {
+                all_files.Enqueue(item);    //  入队加载器结构
+            }
+
+            #endregion
+
+            #region 入队 PluginStruct 部分
+
+            EnqueueSingleLong(ref all_files, pluginStruct.LongLength);      //  入队插件结构的长度
+
+#if DEBUG
+            Console.WriteLine($"Plugin Struct Length: {pluginStruct.LongLength}");
+#endif
+
+            foreach (var item in pluginStruct)
+            {
+                all_files.Enqueue(item);    //  入队插件结构
+            }
+
+            #endregion
+
+            #region 入队文件表部分
 
             EnqueueSingleLong(ref all_files, fileCount);    //  入队文件表长度
 
@@ -73,6 +107,10 @@ namespace KitX.KXP.Helper
 #endif
             }
 
+            #endregion
+
+            #region 入队文件部分
+
             int index = 0;
             foreach (var item in files)
             {
@@ -87,27 +125,9 @@ namespace KitX.KXP.Helper
                 ++index;
             }
 
-            EnqueueSingleLong(ref all_files, loaderStruct.LongLength);      //  入队加载器结构的长度
+            #endregion
 
-#if DEBUG
-            Console.WriteLine($"Loader Struct Length: {loaderStruct.LongLength}");
-#endif
-
-            foreach (var item in loaderStruct)
-            {
-                all_files.Enqueue(item);    //  入队加载器结构
-            }
-
-            EnqueueSingleLong(ref all_files, pluginStruct.LongLength);      //  入队插件结构的长度
-
-#if DEBUG
-            Console.WriteLine($"Plugin Struct Length: {pluginStruct.LongLength}");
-#endif
-
-            foreach (var item in pluginStruct)
-            {
-                all_files.Enqueue(item);    //  入队插件结构
-            }
+            #region 计算哈希校验
 
             byte[] filesBytes = all_files.ToArray();
 
@@ -121,20 +141,23 @@ namespace KitX.KXP.Helper
             Console.Write($"Hash Code: {Encoding.UTF8.GetString(hash)}");
 #endif
 
+            #endregion
+
+            #region 写入文件
+
             foreach (var item in Header.header)
-            {
                 fs.WriteByte(item);     //  写入文件标头
-            }
 
             foreach (var item in hash)
-            {
                 fs.WriteByte(item);     //  写入哈希值
-            }
 
             foreach (var item in filesBytes)
             {
                 fs.WriteByte(item);     //  写入文件体
+                fs.Flush();             //  每写入一个文件就清空缓冲区并确保写入文件
             }
+
+            #endregion
 
             fs.Flush();
             fs.Close();
