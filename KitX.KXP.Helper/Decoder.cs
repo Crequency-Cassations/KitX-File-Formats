@@ -187,7 +187,7 @@ namespace KitX.KXP.Helper
                 for (int i = 0; i < item.FileNamePathLength; ++i, ++cursor) fn[i] = src[cursor];
                 for (int i = 0; i < item.FileBodyLength; ++i, ++cursor) fb[i] = src[cursor];
                 string fileName = Encoding.UTF8.GetString(fn);
-                string dirPath = Path.GetDirectoryName(fileName);
+                string dirPath = Path.GetDirectoryName(Path.GetFullPath($"{releaseFolder}/{fileName}"));
                 if (!Directory.Exists(dirPath))
                     Directory.CreateDirectory(dirPath);
                 File.WriteAllBytes($"{releaseFolder}\\{fileName}", fb);
