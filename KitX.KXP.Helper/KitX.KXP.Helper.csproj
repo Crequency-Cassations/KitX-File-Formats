@@ -5,8 +5,6 @@
         <Nullable>disable</Nullable>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Title>KitX.KXP.Helper</Title>
-        <BaseOutputPath>..\..\KitX Build\File Format Helper\KXP\</BaseOutputPath>
-        <BaseIntermediateOutputPath>..\..\KitX Build\Temp\File Format Helper\KXP\</BaseIntermediateOutputPath>
         <Company>Crequency</Company>
         <Authors>Dynesshely</Authors>
         <PackageProjectUrl>https://github.com/Crequency/KitX/</PackageProjectUrl>
