@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.1;net46</TargetFrameworks>
-        <Nullable>disable</Nullable>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>Preview</LangVersion>
+        <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Title>KitX.KXP.Helper</Title>
         <Company>Crequency</Company>
@@ -25,6 +26,10 @@
             <PackagePath>\</PackagePath>
             <Pack>True</Pack>
         </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CommandLineParser" Version="2.9.1" />
     </ItemGroup>
 
 </Project>
