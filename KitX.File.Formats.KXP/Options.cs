@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace KitX.KXP.Helper;
+namespace KitX.File.Formats.KXP;
 
 public class Options
 {

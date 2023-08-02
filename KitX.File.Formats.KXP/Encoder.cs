@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace KitX.KXP.Helper;
+namespace KitX.File.Formats.KXP;
 
 public class Encoder
 {

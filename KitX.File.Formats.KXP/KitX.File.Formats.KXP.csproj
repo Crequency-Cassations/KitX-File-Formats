@@ -5,7 +5,7 @@
         <LangVersion>Preview</LangVersion>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Title>KitX.KXP.Helper</Title>
+        <Title>KitX.File.Formats.KXP</Title>
         <Company>Crequency</Company>
         <Authors>Dynesshely</Authors>
         <PackageProjectUrl>https://github.com/Crequency/KitX/</PackageProjectUrl>
@@ -17,7 +17,7 @@
         <AssemblyVersion>$(Version)</AssemblyVersion>
         <FileVersion>$(Version)</FileVersion>
         <Version>23.04.$([System.DateTime]::UtcNow.Date.Subtract($([System.DateTime]::Parse("2005-06-06"))).TotalDays).$([System.Math]::Floor($([System.DateTime]::UtcNow.TimeOfDay.TotalMinutes)))</Version>
-        <Description>.kxp file format helper for KitX</Description>
+        <Description>KitX File Formats - `.kxp` format related.</Description>
 
     </PropertyGroup>
 
@@ -29,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="CommandLineParser" Version="2.9.1" />
+        <PackageReference Include="CommandLineParser" Version="2.9.1" />
     </ItemGroup>
 
 </Project>

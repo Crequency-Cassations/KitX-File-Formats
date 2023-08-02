@@ -1,4 +1,4 @@
-﻿namespace KitX.KXP.Helper;
+﻿namespace KitX.File.Formats.KXP;
 
 internal static class Header
 {
