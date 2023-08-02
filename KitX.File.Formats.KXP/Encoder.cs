@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace KitX.File.Formats.KXP;
+
+using File = System.IO.File;
 
 public class Encoder
 {

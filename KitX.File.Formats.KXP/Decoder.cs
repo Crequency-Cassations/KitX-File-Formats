@@ -6,6 +6,8 @@ using System.Text;
 
 namespace KitX.File.Formats.KXP;
 
+using File = System.IO.File;
+
 public class Decoder
 {
     public Decoder(string packagePath, Options? options = null)

@@ -5,26 +5,35 @@
         <LangVersion>Preview</LangVersion>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Title>KitX.File.Formats.KXP</Title>
-        <Company>Crequency</Company>
-        <Authors>Dynesshely</Authors>
-        <PackageProjectUrl>https://github.com/Crequency/KitX/</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/Crequency/KitX/</RepositoryUrl>
-        <PackageIcon>KitX-Background-ani.png</PackageIcon>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
 
+    <PropertyGroup>
         <AssemblyVersion>$(Version)</AssemblyVersion>
         <FileVersion>$(Version)</FileVersion>
         <Version>23.04.$([System.DateTime]::UtcNow.Date.Subtract($([System.DateTime]::Parse("2005-06-06"))).TotalDays).$([System.Math]::Floor($([System.DateTime]::UtcNow.TimeOfDay.TotalMinutes)))</Version>
-        <Description>KitX File Formats - `.kxp` format related.</Description>
+    </PropertyGroup>
 
+    <PropertyGroup>
+        <Title>KitX.File.Formats.KXP</Title>
+        <Company>Crequency</Company>
+        <Authors>Dynesshely</Authors>
+        <Description>KitX File Formats - `.kxp` format related.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <PackageIcon>KitX-Background-ani.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/Crequency/KitX/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Crequency/KitX/</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="KitX-Background-ani.png">
-            <PackagePath>\</PackagePath>
             <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
         </None>
     </ItemGroup>
 
