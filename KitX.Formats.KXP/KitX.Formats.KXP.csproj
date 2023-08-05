@@ -14,7 +14,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Title>KitX.File.Formats.KXP</Title>
+        <Title>KitX.Formats.KXP</Title>
         <Company>Crequency</Company>
         <Authors>Dynesshely</Authors>
         <Description>KitX File Formats - `.kxp` format related.</Description>

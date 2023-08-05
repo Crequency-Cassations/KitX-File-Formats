@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace KitX.File.Formats.KXP;
+namespace KitX.Formats.KXP;
 
 using File = System.IO.File;
 
@@ -56,7 +56,7 @@ public class Encoder
         var loaderStruct = Encoding.UTF8.GetBytes(LoaderStruct);
         var pluginStruct = Encoding.UTF8.GetBytes(PluginStruct);
 
-        var fileCount = files.Keys.Count;   //  待封装的文件数量  
+        var fileCount = files.Keys.Count;   //  待封装的文件数量
 
         if (Options.Verbose)
             Console.WriteLine($"Count of files to include: {fileCount}");

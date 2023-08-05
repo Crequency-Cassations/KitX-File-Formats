@@ -1,4 +1,4 @@
-﻿namespace KitX.File.Formats.KXP;
+﻿namespace KitX.Formats.KXP;
 
 internal static class Header
 {
@@ -6,16 +6,16 @@ internal static class Header
     {
             073, // I
             116, // t
-            032, //  
+            032, //
             105, // i
             115, // s
-            032, //  
+            032, //
             097, // a
-            032, //  
+            032, //
             075, // K
             088, // X
             080, // P
-            032, //  
+            032, //
             102, // f
             105, // i
             108, // l

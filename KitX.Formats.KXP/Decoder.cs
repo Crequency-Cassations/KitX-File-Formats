@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace KitX.File.Formats.KXP;
+namespace KitX.Formats.KXP;
 
 using File = System.IO.File;
 
