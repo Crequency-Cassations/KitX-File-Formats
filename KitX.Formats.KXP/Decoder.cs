@@ -6,8 +6,6 @@ using System.Text;
 
 namespace KitX.Formats.KXP;
 
-using File = System.IO.File;
-
 public class Decoder
 {
     public Decoder(string packagePath, Options? options = null)
@@ -21,27 +19,14 @@ public class Decoder
 
     public Options Options { get; set; }
 
-    /// <summary>
-    /// 文件地图项
-    /// </summary>
     internal struct FileMapItem
     {
-        /// <summary>
-        /// 文件名长度
-        /// </summary>
         internal long FileNamePathLength;
 
-        /// <summary>
-        /// 文件体长度
-        /// </summary>
         internal long FileBodyLength;
     }
 
-    /// <summary>
-    /// 获取加载器结构和插件结构的字符串
-    /// </summary>
-    /// <returns>加载器结构和插件结构的字符串</returns>
-    public Tuple<string, string> GetLoaderAndPluginStruct()
+    public Tuple<string, string> GetLoaderAndPluginInfo()
     {
         var fs = new FileStream(PackagePath, FileMode.Open, FileAccess.Read);
         var reader = new BinaryReader(fs);
@@ -71,18 +56,12 @@ public class Decoder
         return result;
     }
 
-    /// <summary>
-    /// 解码包体
-    /// </summary>
-    /// <returns>返回 LoaderStruct 的 json 字符串 和 PluginStruct 的 json 字符串</returns>
-    /// <param name="releaseFolder">释放文件的路径</param>
-    /// <exception cref="Exception">哈希校验错误</exception>
     public Tuple<string, string> Decode(string releaseFolder)
     {
         if (!Directory.Exists(releaseFolder))
-            _ = Directory.CreateDirectory(releaseFolder);   //  如果释放文件夹不存在就创建
+            _ = Directory.CreateDirectory(releaseFolder);
 
-        var src = File.ReadAllBytes(PackagePath);    //  读取包的全部字节
+        var src = File.ReadAllBytes(PackagePath);
 
         #region 获取文件表头, 验证文件是否为 KXP 文件 (0 - 15)
 
